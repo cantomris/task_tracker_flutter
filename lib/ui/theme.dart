@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const bluishColor = Color(0xFF4e5ae8);
 const yellowColor = Color(0xFFFFB746);
@@ -10,8 +12,28 @@ const darkGreyColor = Color(0xFF121212);
 const darkHeaderColor = Color(0xFF424242);
 
 class Themes {
-  static final light =
-      ThemeData(primaryColor: customPrimaryColor, brightness: Brightness.light);
-  static final dark =
-      ThemeData(primaryColor: darkGreyColor, brightness: Brightness.dark);
+  static final light = ThemeData(
+      backgroundColor: Colors.white,
+      primaryColor: customPrimaryColor,
+      brightness: Brightness.light);
+  static final dark = ThemeData(
+      backgroundColor: darkGreyColor,
+      primaryColor: darkGreyColor,
+      brightness: Brightness.dark);
+}
+
+TextStyle get headerDateStyle {
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
+
+TextStyle get headerDayStyle {
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+        fontSize: 30, fontWeight: FontWeight.bold, color: Colors.grey),
+  );
 }
