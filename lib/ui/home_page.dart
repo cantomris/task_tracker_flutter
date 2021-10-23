@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
               body: Get.isDarkMode
                   ? 'Activated Light Mode'
                   : 'Activated Dark Mode');
+          notifyHelper.scheduledNotification();
         },
         child: const Icon(Icons.nightlight_round, size: 20),
       ),
