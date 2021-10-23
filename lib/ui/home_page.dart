@@ -1,5 +1,7 @@
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:task_tracker_flutter/services/notification_services.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DateTime _selectedDate = DateTime.now();
   dynamic notifyHelper;
   @override
   void initState() {
@@ -31,6 +34,23 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           _mainHeader(),
+          Container(
+              margin: const EdgeInsets.only(left: 20),
+              child: DatePicker(
+                DateTime.now(),
+                height: 90,
+                width: 65,
+                initialSelectedDate: DateTime.now(),
+                selectionColor: customPrimaryColor,
+                selectedTextColor: Colors.white,
+                dateTextStyle: customDateStyle,
+                dayTextStyle: customDayStyle,
+                monthTextStyle: customMonthStyle,
+                onDateChange: (date) {
+                  _selectedDate = date;
+                  debugPrint(_selectedDate.toString());
+                },
+              ))
         ],
       ),
     );

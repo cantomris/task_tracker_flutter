@@ -37,3 +37,21 @@ TextStyle get headerDayStyle {
         fontSize: 30, fontWeight: FontWeight.bold, color: Colors.grey),
   );
 }
+
+TextStyle get customDateStyle {
+  return GoogleFonts.lato(
+      textStyle: const TextStyle(
+          fontSize: 22, fontWeight: FontWeight.w600, color: Colors.grey));
+}
+
+TextStyle get customDayStyle {
+  return GoogleFonts.lato(
+      textStyle: const TextStyle(
+          fontSize: 18, fontWeight: FontWeight.w600, color: Colors.grey));
+}
+
+TextStyle get customMonthStyle {
+  return GoogleFonts.lato(
+      textStyle: const TextStyle(
+          fontSize: 12, fontWeight: FontWeight.w600, color: Colors.grey));
+}
