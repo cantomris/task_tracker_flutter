@@ -32,26 +32,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _appBar(),
       body: Column(
-        children: [
-          _mainHeader(),
-          Container(
-              margin: const EdgeInsets.only(left: 20),
-              child: DatePicker(
-                DateTime.now(),
-                height: 90,
-                width: 65,
-                initialSelectedDate: DateTime.now(),
-                selectionColor: customPrimaryColor,
-                selectedTextColor: Colors.white,
-                dateTextStyle: customDateStyle,
-                dayTextStyle: customDayStyle,
-                monthTextStyle: customMonthStyle,
-                onDateChange: (date) {
-                  _selectedDate = date;
-                  debugPrint(_selectedDate.toString());
-                },
-              ))
-        ],
+        children: [_mainHeader(), _dateSelector()],
       ),
     );
   }
@@ -101,5 +82,25 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  _dateSelector() {
+    return Container(
+        margin: const EdgeInsets.only(left: 20),
+        child: DatePicker(
+          DateTime.now(),
+          height: 90,
+          width: 65,
+          initialSelectedDate: DateTime.now(),
+          selectionColor: customPrimaryColor,
+          selectedTextColor: Colors.white,
+          dateTextStyle: customDateStyle,
+          dayTextStyle: customDayStyle,
+          monthTextStyle: customMonthStyle,
+          onDateChange: (date) {
+            _selectedDate = date;
+            debugPrint(_selectedDate.toString());
+          },
+        ));
   }
 }
