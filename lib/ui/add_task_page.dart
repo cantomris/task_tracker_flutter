@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:task_tracker_flutter/models/task.dart';
 import 'package:task_tracker_flutter/ui/theme.dart';
 import 'package:task_tracker_flutter/ui/widgets/button.dart';
 import 'package:task_tracker_flutter/ui/widgets/input_box.dart';
+import 'package:task_tracker_flutter/controllers/task_controller.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TaskController _taskController = Get.put(TaskController());
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
@@ -166,7 +169,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _validateForm() {
     if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
-      // Add to db
+      _addTaskToDb();
       Get.back();
     } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
       Get.snackbar('Required', 'All fields must be filled',
@@ -175,6 +178,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
           backgroundColor: Colors.black,
           icon: const Icon(Icons.warning_amber_rounded, color: Colors.white));
     }
+  }
+
+  _addTaskToDb() async {
+    int value = await _taskController.addTask(
+        task: Task(
+      remind: _selectedRemindTime,
+      isCompleted: 0,
+      color: _selectedColor,
+      title: _titleController.text,
+      note: _noteController.text,
+      date: DateFormat.yMd().format(_selectedDate),
+      startTime: _startTime,
+      endTime: _endTime,
+      repeat: _selectedRepeatTime,
+    ));
+    print('Current id ' '$value');
   }
 
   _appBar(BuildContext context) {
