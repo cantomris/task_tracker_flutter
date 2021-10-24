@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:task_tracker_flutter/services/theme_services.dart';
 import 'package:task_tracker_flutter/ui/theme.dart';
+import 'package:task_tracker_flutter/ui/widgets/button.dart';
 import 'package:task_tracker_flutter/ui/widgets/input_box.dart';
 
 class AddTaskPage extends StatefulWidget {
@@ -28,6 +28,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     'Annually'
   ];
   String _selectedRepeatTime = 'None';
+  int _selectedColor = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +143,18 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   }).toList(),
                 ),
               ),
+              const SizedBox(
+                height: 18,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _colorPicker(),
+                  Expanded(child: Container()),
+                  MyButton(label: 'Create Task', onTap: () => null)
+                ],
+              ),
             ],
           ),
         ),
@@ -214,6 +227,49 @@ class _AddTaskPageState extends State<AddTaskPage> {
       //         ? int.parse(_startTime.split(':')[0])
       //         : int.parse(_endTime.split(':')[0]),
       //     minute: int.parse(_startTime.split(':')[1].split(' ')[0])),
+    );
+  }
+
+  _colorPicker() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            'Color',
+            style: titleStyle,
+          ),
+        ),
+        Wrap(
+          children: List<Widget>.generate(3, (int index) {
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedColor = index;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: CircleAvatar(
+                    radius: 14,
+                    backgroundColor: index == 0
+                        ? customPrimaryColor
+                        : index == 1
+                            ? pinkColor
+                            : yellowColor,
+                    child: _selectedColor == index
+                        ? const Icon(
+                            Icons.done,
+                            color: Colors.white,
+                            size: 16,
+                          )
+                        : Container()),
+              ),
+            );
+          }),
+        ),
+      ],
     );
   }
 }
