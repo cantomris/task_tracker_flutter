@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const bluishColor = Color(0xFF4e5ae8);
@@ -33,9 +34,8 @@ TextStyle get headerDateStyle {
 
 TextStyle get headerDayStyle {
   return GoogleFonts.lato(
-    textStyle: const TextStyle(
-        fontSize: 30, fontWeight: FontWeight.bold, color: Colors.grey),
-  );
+      textStyle: const TextStyle(
+          fontSize: 30, fontWeight: FontWeight.bold, color: Colors.grey));
 }
 
 TextStyle get customDateStyle {
@@ -54,4 +54,20 @@ TextStyle get customMonthStyle {
   return GoogleFonts.lato(
       textStyle: const TextStyle(
           fontSize: 12, fontWeight: FontWeight.w600, color: Colors.grey));
+}
+
+TextStyle get titleStyle {
+  return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: Get.isDarkMode ? Colors.white : Colors.black));
+}
+
+TextStyle get subTitleStyle {
+  return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: Get.isDarkMode ? Colors.grey[100] : Colors.grey[600]));
 }

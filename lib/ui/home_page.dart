@@ -9,6 +9,8 @@ import 'package:task_tracker_flutter/services/theme_services.dart';
 import 'package:task_tracker_flutter/ui/theme.dart';
 import 'package:task_tracker_flutter/ui/widgets/button.dart';
 
+import 'add_task_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -50,7 +52,8 @@ class _HomePageState extends State<HomePage> {
                   : 'Activated Dark Mode');
           notifyHelper.scheduledNotification();
         },
-        child: const Icon(Icons.nightlight_round, size: 20),
+        child: Icon(Icons.nightlight_round,
+            size: 20, color: Get.isDarkMode ? Colors.white : Colors.black),
       ),
       actions: const [
         CircleAvatar(
@@ -78,7 +81,8 @@ class _HomePageState extends State<HomePage> {
               Text('Today', style: headerDayStyle)
             ],
           ),
-          MyButton(label: "+ New Task", onTap: () => null),
+          MyButton(
+              label: "+ New Task", onTap: () => Get.to(() => AddTaskPage())),
         ],
       ),
     );
