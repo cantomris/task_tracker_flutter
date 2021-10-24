@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       appBar: _appBar(),
       body: Column(
         children: [_mainHeader(), _dateSelector()],
@@ -42,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   _appBar() {
     return AppBar(
       backgroundColor: context.theme.backgroundColor,
+      elevation: 0,
       leading: GestureDetector(
         onTap: () {
           ThemeServices().switchTheme();
@@ -82,7 +84,8 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           MyButton(
-              label: "+ New Task", onTap: () => Get.to(() => AddTaskPage())),
+              label: "+ New Task",
+              onTap: () => Get.to(() => const AddTaskPage())),
         ],
       ),
     );
