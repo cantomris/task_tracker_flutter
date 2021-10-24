@@ -13,6 +13,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   String _startTime = DateFormat('HH:mm').format(DateTime.now()).toString();
   String _endTime = DateFormat('HH:mm')
@@ -45,14 +47,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 'Add Tasks',
                 style: headerDayStyle,
               ),
-              const InputField(
-                title: 'Title',
-                hint: 'Enter title here',
-              ),
-              const InputField(
-                title: 'Note',
-                hint: 'Enter note here',
-              ),
+              InputField(
+                  title: 'Title',
+                  hint: 'Enter title here',
+                  controller: _titleController),
+              InputField(
+                  title: 'Note',
+                  hint: 'Enter note here',
+                  controller: _noteController),
               InputField(
                 title: 'Date',
                 hint: DateFormat.yMd().format(_selectedDate),
@@ -152,7 +154,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 children: [
                   _colorPicker(),
                   Expanded(child: Container()),
-                  MyButton(label: 'Create Task', onTap: () => null)
+                  MyButton(label: 'Create Task', onTap: () => _validateForm())
                 ],
               ),
             ],
@@ -160,6 +162,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
       ),
     );
+  }
+
+  _validateForm() {
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      // Add to db
+      Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      Get.snackbar('Required', 'All fields must be filled',
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.black,
+          icon: const Icon(Icons.warning_amber_rounded, color: Colors.white));
+    }
   }
 
   _appBar(BuildContext context) {
