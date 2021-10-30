@@ -193,7 +193,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       endTime: _endTime,
       repeat: _selectedRepeatTime,
     ));
-    print('Current id ' '$value');
+    // print('Current id ' '$value');
   }
 
   _appBar(BuildContext context) {
@@ -252,16 +252,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _showTimePicker({required bool isStartTime}) {
     return showTimePicker(
-      // TODO - Disable AM / PM
-      initialEntryMode: TimePickerEntryMode.dial,
-      context: context,
-      initialTime: TimeOfDay.now(),
-      // initialTime: TimeOfDay(
-      //     hour: isStartTime == true
-      //         ? int.parse(_startTime.split(':')[0])
-      //         : int.parse(_endTime.split(':')[0]),
-      //     minute: int.parse(_startTime.split(':')[1].split(' ')[0])),
-    );
+        // TODO - Disable AM / PM
+        initialEntryMode: TimePickerEntryMode.dial,
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (BuildContext context, Widget? child) {
+          return MediaQuery(
+              child: child!,
+              data:
+                  MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true));
+        }
+        // initialTime: TimeOfDay(
+        //     hour: isStartTime == true
+        //         ? int.parse(_startTime.split(':')[0])
+        //         : int.parse(_endTime.split(':')[0]),
+        //     minute: int.parse(_startTime.split(':')[1].split(' ')[0])),
+        );
   }
 
   _colorPicker() {
